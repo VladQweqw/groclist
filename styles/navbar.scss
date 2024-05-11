@@ -1,0 +1,85 @@
+.navbar {
+    box-shadow: $shadow;
+    border-bottom: 2px solid $text-black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2em;
+    font-family: $ff-main;
+    background-color: $background;
+    
+    .svg-img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .nav {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+
+        .user-item {
+            stroke-width: 3;
+            
+            &:hover {
+                scale: 1.2;
+            }
+            
+        }
+        
+    }
+    
+    .nav-item {
+        font-size: 1.25rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        position: relative;
+        transition: 200ms ease;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: $text-black;                
+            transition: 200ms ease;
+        }
+
+        &:hover::before {
+            width: 100%;
+        }
+    }
+    
+    .logo {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 400;
+        cursor: pointer;
+    }
+
+}
+
+@media(max-width: 500px) {
+    .navbar {
+        padding: 1rem;
+
+        .nav-item {
+            &:hover::before {
+                width: 0%;
+            }
+            &:hover {
+                scale: 1.2;
+            }
+        }
+
+        .hidden-media {
+            display: none;
+        }
+    }
+
+}

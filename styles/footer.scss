@@ -1,0 +1,26 @@
+.footer {
+    border-top: 2px solid $text-black;    
+    background-color: $background;
+
+    .footer-links {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        
+        .nav-item {
+            color: $text-black;
+        }
+        
+    }
+
+
+}
+
+@media(max-width: 500px) {
+    .footer {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+}

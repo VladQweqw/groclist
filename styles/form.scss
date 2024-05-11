@@ -1,0 +1,61 @@
+.background-svg {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+
+    &-bottom {
+        top: 30%;
+    }
+
+    &-top {
+        top: -100%;
+        left: -30%;
+    }
+}
+
+.form-container {
+    text-align: center;
+    height: 100%;
+    gap: 1rem;
+    flex-direction: column;
+
+    .form {
+        max-width: 400px;
+        width: 100%;
+        display: grid;
+        gap: 1rem;
+
+        .input {
+            width: 100%;
+            
+            .input-field {
+                text-align: center;
+                border: 2px solid $text-black;
+                border-radius: 8px;
+                font-size: 1rem;
+                width: 100%;
+                padding: .9em .5em;
+                transition: 200ms ease;
+                
+            }
+
+            .input-error {
+                border: 2px solid $red;
+            }
+        }
+        
+        .error-text {
+            color: $red;
+        }
+
+
+        .button-wrapper {
+            width: 100%;
+            
+            .submit-btn {
+
+            }
+        }
+    }
+}
