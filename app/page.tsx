@@ -1,10 +1,15 @@
 
 'use client'
 import { useEffect, useState } from "react";
-import { endpoint } from "./login/page"
 import Image from "next/image";
 
-const egg = require('../assets/egg.svg')
+import { Suspense } from "react";
+import Loading from "./loading";
+
+import { convertTime } from "@/functions/functions";
+import Link from "next/link";
+
+const link_svg = require('../assets/link.svg')
 
 type listType = {
    _id: string,
@@ -34,7 +39,6 @@ export default function App() {
       })
       .catch((err) => {
          console.log(err);
-         alert(err)
       })
       
    }
@@ -45,28 +49,38 @@ export default function App() {
    
    
    return(
-    <main className="main">
-      {lists?.map((list: listType, key: number) => {
-         return <List list={list} index_list={key} key={key} />
-      })}
+    <main className="main list-main">
+         {lists?.map((list: listType, key: number) => {
+            return <Suspense key={key} fallback={<Loading />}>
+               <List list={list} index_list={key} key={key} />
+            </Suspense>
+         })}
     </main>
    )
 }
 
-function List(data: {
+export function List(data: {
    list: listType,
    index_list: number
 }) {   
+   
    return(
       <div className="list">
          <header className="list-header">
-            <h1 className="title">{data.list.title}</h1>
+            <Link href={`/list/${data.list._id}`}>
+            <h1 className="title">
+               <Image
+               src={link_svg}
+               alt={'Link'}
+               />
+               {data.list.title}</h1></Link>
             <div className="header-container">
                <p className="list-user">Made by {data.list.user.nickname}</p>
-               <p className="list-date">{data.list.createdAt}</p>
+               <p className="list-date">{convertTime(data.list.createdAt).toString()}</p>
             </div>
          </header>
          <div className="list-items">
+            <p>Total items: {data.list.list.length}</p>
             {data.list.list.map((list_item: string, index: number) => {
                return <ListItem name={list_item} index={(data.index_list * 10) + index} key={index} />
             })}
@@ -75,26 +89,30 @@ function List(data: {
    )
 }
 
-
-function ListItem(data: {
+export function ListItem(data: {
    name: string,
    index: number
 }) {
 
 
    return(
-         <label className="list-item" htmlFor={`checkbox-${data.index}`}>
-            <input type="checkbox" name={"checkbox"} id={`checkbox-${data.index}`} className="item-checkbox" />
-            <span className="item-image">
-               <Image 
-               src={egg}
-               alt={data.name}
-               />
-            </span>
-            <div className="list-item-name">
-               {data.name}
-            </div>
-         </label>
+         <div className="list-item" >
+            <div className="checkbox-wrapper-4">
+               <input className="inp-cbx" id={`checkbox-${data.index}`} type="checkbox"/>
+               <label className="cbx" htmlFor={`checkbox-${data.index}`}><span>
+               <svg width="12px" height="10px">
+                  <use xlinkHref="#check-4"></use>
+               </svg></span>
+               <span>{data.name}</span>
+               
+               </label>
+               <svg className="inline-svg">
+                  <symbol id="check-4" viewBox="0 0 12 10">
+                     <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </symbol>
+               </svg>
+               </div>
+         </div>
  
    )
 }

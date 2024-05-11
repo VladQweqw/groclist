@@ -22,13 +22,14 @@ export default function RootLayout({
 
       <body>
         <div className="navbar">
+          <Link href={'/'}>
           <div className="logo">
             <Image
               src={logo_image}
               alt="Logo image"
             />
             <p className="logo-name hidden-media">GrogList</p>
-          </div>
+          </div></Link>
           <nav className="nav">
             <div className="nav-item">
               <Image
