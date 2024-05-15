@@ -13,4 +13,5 @@ type listType = {
 type listItemType = {
    name: string,
    isChecked: boolean,
+   _id: string,
 }

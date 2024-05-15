@@ -8,31 +8,36 @@ export const metadata = {
 
 import '../styles/index.scss'
 
+import IsAuth from '@/components/isAuth'
+
 const logo_image = require('../assets/logo_svg.svg')
 const user_image = require('../assets/user_svg.svg')
 const add_image = require('../assets/add_svg.svg')
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
+  const user_logged = await IsAuth()
+
   return (
     <html lang="en">
 
       <body>
         <div className="navbar">
           <Link href={'/'}>
-          <div className="logo">
-            <Image
-              src={JSON.parse(JSON.stringify(logo_image))}
-              alt="Logo image"
-            />
-            <p className="logo-name hidden-media">GrogList</p>
-          </div></Link>
+            <div className="logo">
+              <Image
+                src={JSON.parse(JSON.stringify(logo_image))}
+                alt="Logo image"
+              />
+              <p className="logo-name hidden-media">GrogList</p>
+            </div></Link>
           <nav className="nav">
             <div className="nav-item">
-              <Link  href={'/list/add'}>
+              <Link href={'/list/add'}>
                 <Image
                   className='svg-img'
                   src={JSON.parse(JSON.stringify(add_image))}
@@ -57,19 +62,29 @@ export default function RootLayout({
 
         <footer className='footer navbar'>
           <div className="footer-links">
-            <Link href={'/login'}>
-            <div className="nav-item">
-              Login
-            </div>
-            </Link>
-            <Link href={'/register'}>
-            <div className="nav-item">
-              Sign up
-            </div>
-            </Link>
+            {user_logged ?
+              <Link href={'/account'}>
+                <div className="nav-item">
+                  Account
+                </div>
+              </Link>
+              :
+              <>
+                <Link href={'/login'}>
+                  <div className="nav-item">
+                    Login
+                  </div>
+                </Link>
+                <Link href={'/register'}>
+                  <div className="nav-item">
+                    Sign up
+                  </div>
+                </Link>
+              </>
+            }
           </div>
           <p className="trademark">All right reserved GrocList@2024</p>
-        </footer> 
+        </footer>
       </body>
     </html>
   )

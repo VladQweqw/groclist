@@ -52,6 +52,7 @@ export default function Login() {
       })
       .then((resp) => resp.json())
       .then((data) => {
+         alert(data)
          if(data.detail) {            
             push(`/`)
 
@@ -68,25 +69,16 @@ export default function Login() {
       })
       .catch((err) => {
          pwd_error.current!.innerText = 'There was an error, please try again later.'
-         
-         push(`/`)
-         
+
+         // push(`/`)
       })
+
+
+
    }
 
    return(
     <main className="main">
-         {/* <Image 
-         src={background_svg}
-         className="svg background-svg background-svg-top"
-         alt="background-detail"
-         />
-
-         <Image 
-         src={background_svg}
-         className="svg background-svg background-svg-bottom"
-         alt="background-detail"
-         /> */}
 
          <div className="form-container center">
             <h1 className="title">Login</h1>

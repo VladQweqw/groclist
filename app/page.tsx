@@ -14,7 +14,7 @@ import { cookies } from "next/headers";
 
 async function get_lists() {
    const cookiesStore = cookies()
-   const token = cookiesStore.get("jwt")!.value || undefined
+   const token = cookiesStore.get("jwt")?.value || undefined
    
    const res = await fetch(process.env.NEXT_PUBLIC_ENDPOINT + "/", {
       headers: {
@@ -29,8 +29,8 @@ async function get_lists() {
 }
 
 export default async function App() {
-   const lists = await get_lists()
-   
+   const lists = await get_lists()   
+
    return(
     <main className="main list-main">
          {lists?.map((list: listType, key: number) => {
@@ -46,8 +46,7 @@ export function List(data: {
    list: listType,
    index_list: number
 }) {      
-   
-
+      
    return(
       <div className="list">
          <header className="list-header">
