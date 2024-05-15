@@ -25,26 +25,30 @@ export default function RootLayout({
           <Link href={'/'}>
           <div className="logo">
             <Image
-              src={logo_image}
+              src={JSON.parse(JSON.stringify(logo_image))}
               alt="Logo image"
             />
             <p className="logo-name hidden-media">GrogList</p>
           </div></Link>
           <nav className="nav">
             <div className="nav-item">
-              <Image
-                className='svg-img'
-                src={add_image}
-                alt="User image"
-              />
-              <p className='hidden-media'>Create list</p>
+              <Link  href={'/list/add'}>
+                <Image
+                  className='svg-img'
+                  src={JSON.parse(JSON.stringify(add_image))}
+                  alt="User image"
+                />
+                <p className='hidden-media'>Create list</p>
+              </Link>
             </div>
             <div className="nav-item user-item">
-              <Image
-                className='svg-img'
-                src={user_image}
-                alt="User image"
-              />
+              <Link href={'/account'}>
+                <Image
+                  className='svg-img'
+                  src={JSON.parse(JSON.stringify(user_image))}
+                  alt="User image"
+                />
+              </Link>
             </div>
           </nav>
         </div>

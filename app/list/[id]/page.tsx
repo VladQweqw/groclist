@@ -1,26 +1,20 @@
 
-
-import React,{} from 'react'
-import { useSearchParams } from 'next/navigation'
 import { List } from '@/app/page'
 
-async function getDetailList(nodeId: string) {
-   const res = await fetch(`http://localhost:3000/list/${params.id}`)
+async function getDetailList(id: string) {
+   const res = await fetch(process.env.NEXT_PUBLIC_ENDPOINT + '/list/' + id)
    const data = await res.json()
 
-   return data
+   return data as { data: listType}
 }
 
-export default async function ListDetail({ params }: any) {
+export default async function ListDetail({ params }: { params: {id: string}}) {
    const list = await getDetailList(params.id)
-   console.log(list);
    
-
-
    return(
-    <main className="main">
-      {/* <List list={} index_list={1} /> */}
-
+    <main className="main center list-detail-main">
+      <List list={list.data} index_list={1} />
+      
     </main>
    )
 }

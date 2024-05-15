@@ -45,14 +45,14 @@ export default function Login() {
             email,
             password,
          }),
+         credentials: 'include',
          headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
          }
       })
       .then((resp) => resp.json())
       .then((data) => {
-         if(data.detail) {
-            
+         if(data.detail) {            
             push(`/`)
 
          }else if(data.error) {
@@ -67,9 +67,10 @@ export default function Login() {
          }
       })
       .catch((err) => {
-         console.log(`Error: ${err}`);
-            console.log(err);
-            
+         pwd_error.current!.innerText = 'There was an error, please try again later.'
+         
+         push(`/`)
+         
       })
    }
 

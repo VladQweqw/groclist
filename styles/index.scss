@@ -47,8 +47,7 @@ body {
     justify-content: center
 }
 
-.primary-btn {
-    background-color: $accent;
+.btn {
     padding: .9em 1em;
     width: 100%;
     border: 2px solid $text-black;
@@ -56,6 +55,10 @@ body {
     font-size: .9rem;
     cursor: pointer;
     transition: 200ms ease;
+}
+
+.primary-btn {
+    background-color: $accent;
     
     &:hover {
         background-color: $btn-hover
@@ -63,6 +66,14 @@ body {
     
     &:active {
         scale: .9
+    }
+}
+
+.secondary-btn {
+    background-color: $secondary-btn;
+
+    &:hover {
+        background-color: $secondary-btn-hover
     }
 }
 

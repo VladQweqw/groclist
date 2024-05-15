@@ -1,6 +1,5 @@
 export function convertTime(time: string) {
     const date = new Date(time)
-    console.log(date);
     
     const hours = date.getHours().toString().padEnd(2, '0')
     const minutes = date.getMinutes().toString().padEnd(2, '0')

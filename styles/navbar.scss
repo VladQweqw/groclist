@@ -38,6 +38,10 @@
         position: relative;
         transition: 200ms ease;
 
+        a {
+            display: flex;
+        }
+
         &::before {
             content: '';
             position: absolute;
