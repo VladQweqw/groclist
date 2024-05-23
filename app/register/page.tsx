@@ -5,8 +5,6 @@ import { useRef } from "react"
 const background_svg = require('../../assets/background.svg')
 import { useRouter } from 'next/navigation';
 
-export const endpoint = 'http://localhost:3000'
-
 export default function Register() {
    const form_ref = useRef<HTMLFormElement | null>(null)
    const email_error = useRef<HTMLParagraphElement | null>(null)
@@ -39,7 +37,7 @@ export default function Register() {
       }
 
          
-      await fetch(endpoint + '/register', {
+      await fetch(process.env.NEXT_PUBLIC_ENDPOINT + '/register', {
          method: 'POST',
          body: JSON.stringify({
             email,

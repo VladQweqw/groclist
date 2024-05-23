@@ -3,7 +3,6 @@
 import { cookies } from "next/headers";
 
 export default async function IsAuth() {
-
     const cookiesStore = cookies()
     const token = cookiesStore.get("jwt")?.value || undefined
 
@@ -13,11 +12,14 @@ export default async function IsAuth() {
             'Authorization': `${token}`
         }
     })
+
+
     const data = await res.json()
+
     if(data.error) {
         return false
     }
-
+    
     if(data?.detail === 'Jwt verified') {
         return true
     } 

@@ -1,16 +1,13 @@
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
- 
+
 import { Suspense } from "react";
 import Loading from "./loading";
 
-import { convertTime } from "@/functions/functions";
 import Link from "next/link";
 
-const link_svg = require('../assets/link.svg')
-import { ListItem } from "@/components/listItem";
 import { cookies } from "next/headers";
+
+import { List } from "@/components/list";
 
 async function get_lists() {
    const cookiesStore = cookies()
@@ -23,51 +20,46 @@ async function get_lists() {
       },
       method: 'GET'
    })
-   
+
    const data = await res.json()
+
+   if (data?.error) {
+      return data
+   }
+
    return data.data as listType[]
 }
 
 export default async function App() {
-   const lists = await get_lists()   
+   const lists = await get_lists()
 
-   return(
-    <main className="main list-main">
+   
+   if (lists.error === 'Invalid token') {
+      return <main className="main error-main center">
+         <span>
+            <h1>You are not logged in</h1>
+            <p>Please create an account before you continue</p>
+         </span>
+         <div className="btns-wrapper">
+            <Link href={'/register'}>
+               <button className="primary-btn btn">Sign up</button>
+            </Link>
+            <Link href={'/login'}>
+               <button className="secondary-btn btn">Login</button>
+            </Link>
+         </div>
+      </main>
+   }
+
+   return (
+      <main className="main list-main">
+
          {lists?.map((list: listType, key: number) => {
             return <Suspense key={key} fallback={<Loading />}>
                <List list={list} index_list={key} key={key} />
             </Suspense>
          })}
-    </main>
+      </main>
    )
 }
 
-export function List(data: {
-   list: listType,
-   index_list: number
-}) {      
-      
-   return(
-      <div className="list">
-         <header className="list-header">
-            <Link href={`/list/${data.list._id}`}>
-            <h1 className="title">
-               <Image
-               src={JSON.parse(JSON.stringify(link_svg))}
-               alt={'Link'}
-               />
-               {data.list.title}</h1></Link>
-            <div className="header-container">
-               <p className="list-user">Made by {data.list.user.nickname}</p>
-               <p className="list-date">{convertTime(data.list.createdAt).toString()}</p>
-            </div>
-         </header>
-         <div className="list-items">
-            <p>Total items: {data.list.list.length}</p>
-            {data.list.list.map((list_item: listItemType, index: number) => {
-               return <ListItem list_item={list_item} list={data.list} index={(data.index_list * 10) + index} key={index} />
-            })}
-         </div>
-      </div>
-   )
-}

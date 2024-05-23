@@ -22,3 +22,16 @@ export function convertTime(time: string) {
         toString,
     }
 }
+
+export function saveToLocal(key: string, value: any) {
+    return localStorage.setItem(key, JSON.stringify(value))
+}
+
+export function getFromLocal(key: string)  {
+    const data = localStorage.getItem(key)
+    if(data != 'undefined') {        
+        return JSON.parse(data)
+    }
+
+    return null
+}
