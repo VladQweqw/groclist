@@ -17,7 +17,8 @@ async function getUserDetails(id: string) {
     })
     const data = await res.json()
  
-    if(data?.error) return data as {errror: string}
+    if(data?.error) return data 
+
     return data.detail as { detail: userType}
  }
 

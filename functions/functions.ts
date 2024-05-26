@@ -30,7 +30,7 @@ export function saveToLocal(key: string, value: any) {
 export function getFromLocal(key: string)  {
     const data = localStorage.getItem(key)
     if(data != 'undefined') {        
-        return JSON.parse(data)
+        return JSON.parse(data as any)
     }
 
     return null
