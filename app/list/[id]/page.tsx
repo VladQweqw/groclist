@@ -3,6 +3,14 @@ import Link from 'next/link'
 import { cookies } from "next/headers";
 import ListDetailComponent from '../../../components/listDetail';
 
+export async function generateStaticParams() {
+   const posts = await fetch(process.env.NEXT_PUBLIC_ENDPOINT + '/list/').then((res) => res.json())
+  
+   return posts.map((post: any) => ({
+     id: post._id,
+   }))
+}
+
 async function getDetailList(id: string) {
    const cookiesStore = cookies()
    const token = cookiesStore.get("jwt")?.value || undefined

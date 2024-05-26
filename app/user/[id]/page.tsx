@@ -4,6 +4,14 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import Link from "next/link";
 
+export async function generateStaticParams() {
+    const posts = await fetch(process.env.NEXT_PUBLIC_ENDPOINT + '/user/').then((res) => res.json())
+   
+    return posts.map((post: any) => ({
+      id: post._id,
+    }))
+}
+
 async function getUserDetails(id: string) {
     const cookiesStore = cookies()
     const token = cookiesStore.get("jwt")?.value || undefined
