@@ -4,14 +4,6 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import Link from "next/link";
 
-export async function generateStaticParams() {
-    const posts = await fetch(process.env.NEXT_PUBLIC_ENDPOINT + '/user/').then((res) => res.json())
-   
-    return posts.map((post: any) => ({
-      id: post._id,
-    }))
-}
-
 async function getUserDetails(id: string) {
     const cookiesStore = cookies()
     const token = cookiesStore.get("jwt")?.value || undefined
@@ -24,7 +16,6 @@ async function getUserDetails(id: string) {
        }
     })
     const data = await res.json()
- 
     if(data?.error) return data 
 
     return data.detail as { detail: userType}
@@ -51,8 +42,6 @@ export default async function Account({
       </main>
     }
 
-
-
     if(user)
     return(
         <main className="main main-account center">
@@ -61,12 +50,15 @@ export default async function Account({
                 <p className="email">{user.email}</p>
             </header>
 
-            <div className="list-main">
-                {user?.lists?.map((list: listType, key: number) => {
-                    return <Suspense key={key} fallback={<Loading />}>
-                        <List list={list} index_list={key} key={key} />
-                    </Suspense>
-                })}
+            <div className="wrapper">
+                <p>Lists by this user:</p>
+                <div className="list-main">
+                    {user?.lists?.map((list: listType, key: number) => {
+                        return <Suspense key={key} fallback={<Loading />}>
+                            <List list={list} index_list={key} key={key} />
+                        </Suspense>
+                    })}
+                </div>
             </div>
         </main>
    )

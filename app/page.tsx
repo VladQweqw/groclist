@@ -13,7 +13,7 @@ async function get_lists() {
    const cookiesStore = cookies()
    const token = cookiesStore.get("jwt")?.value || undefined
    
-   const res = await fetch(process.env.NEXT_PUBLIC_ENDPOINT + "/", {
+   const res = await fetch(process.env.NEXT_PUBLIC_ENDPOINT + "?reverse=true", {
       headers: {
          'Content-Type': "application/json",
          'Authorization': `${token}`,
@@ -32,7 +32,6 @@ async function get_lists() {
 
 export default async function App() {
    const lists = await get_lists()
-
    
    if (lists.error === 'Invalid token') {
       return <main className="main error-main center">

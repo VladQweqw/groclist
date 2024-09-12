@@ -1,14 +1,22 @@
+'use client'
+
 import Link from "next/link";
 import IsAuth from "./isAuth";
 
-export default async function Footer() {
-    const user_logged = await IsAuth()
-    
+import { useRouter } from 'next/navigation';
+import { getFromLocal } from "@/functions/functions"
+
+export default function Footer() {
+    const user = getFromLocal('user') || {};
+    const router = useRouter();
+
+    if(user == false) router.push('/login')
+
     return (
         <footer className='footer navbar'>
             <div className="footer-links">
-                {user_logged ?
-                    <Link href={'/account'}>
+                {user._id ?
+                    <Link href={`/account/${user._id}`}>
                         <div className="nav-item">
                             Account
                         </div>
