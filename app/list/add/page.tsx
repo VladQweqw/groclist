@@ -68,7 +68,7 @@ export default function Add() {
       }
       const token = getCookie('jwt=')
       
-      fetch(process.env.NEXT_PUBLIC_ENDPOINT + '/', {
+      fetch(process.env.http://192.168.1.69:3000 + '/', {
          headers: {
             'Content-Type': 'application/json',
             'Authorization': `${token}`

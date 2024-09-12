@@ -7,7 +7,7 @@ async function update_list_items(body: {
    state: boolean,
 }, token: string) {
 
-   const res = await fetch(process.env.NEXT_PUBLIC_ENDPOINT + "/item", {
+   const res = await fetch(process.env.http://192.168.1.69:3000 + "/item", {
       headers: {
          'Content-Type': "application/json",
          'Authorization': `${token}`,

@@ -17,7 +17,7 @@ export default function ListDetailComponent(data: listType) {
 
          const token = getCookie('jwt=')
      
-        const res = fetch(process.env.NEXT_PUBLIC_ENDPOINT + '/list/' + id, {
+        const res = fetch(process.env.http://192.168.1.69:3000 + '/list/' + id, {
            method: 'DELETE',
            headers: {
               'Content-Type': 'application/json',

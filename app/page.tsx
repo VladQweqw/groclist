@@ -13,7 +13,7 @@ async function get_lists() {
    const cookiesStore = cookies()
    const token = cookiesStore.get("jwt")?.value || undefined
    
-   const res = await fetch(process.env.NEXT_PUBLIC_ENDPOINT + "?reverse=true", {
+   const res = await fetch(process.env.http://192.168.1.69:3000 + "?reverse=true", {
       headers: {
          'Content-Type': "application/json",
          'Authorization': `${token}`,

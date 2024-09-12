@@ -7,7 +7,7 @@ export default async function IsAuth() {
     const token = cookiesStore.get("jwt")?.value || undefined
 
     
-    const res = await fetch(process.env.NEXT_PUBLIC_ENDPOINT + '/jwt', {
+    const res = await fetch(process.env.http://192.168.1.69:3000 + '/jwt', {
         method: 'GET',
         headers: {
             'Authorization': `${token}`
