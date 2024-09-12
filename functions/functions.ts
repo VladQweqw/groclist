@@ -1,6 +1,6 @@
 export function convertTime(time: string) {
     const date = new Date(time)
-    
+
     const hours = date.getHours().toString().padEnd(2, '0')
     const minutes = date.getMinutes().toString().padEnd(2, '0')
     const day = date.getDate()
@@ -24,14 +24,19 @@ export function convertTime(time: string) {
 }
 
 export function saveToLocal(key: string, value: any) {
-    return localStorage.setItem(key, JSON.stringify(value))
+    if (typeof window !== 'undefined') {
+        return localStorage.setItem(key, JSON.stringify(value))
+    }
 }
 
-export function getFromLocal(key: string)  {
-    const data = localStorage.getItem(key)
-    if(data != 'undefined') {        
-        return JSON.parse(data as any)
-    }
+export function getFromLocal(key: string) {
 
-    return null
+    if (typeof window !== 'undefined') {
+        const data = localStorage.getItem(key)
+        if (data != 'undefined') {
+            return JSON.parse(data as any)
+        }
+
+        return null
+    }
 }
