@@ -68,7 +68,7 @@ export default function Add() {
       }
       const token = getCookie('jwt=')
       
-      fetch("http://localhost:3000" + '/', {
+      fetch("http://192.168.1.68:3000" + '/', {
          headers: {
             'Content-Type': 'application/json',
             'Authorization': `${token}`

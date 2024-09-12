@@ -7,7 +7,7 @@ async function update_list_items(body: {
    state: boolean,
 }, token: string) {
 
-   const res = await fetch("http://localhost:3000" + "/item", {
+   const res = await fetch("http://192.168.1.68:3000" + "/item", {
       headers: {
          'Content-Type': "application/json",
          'Authorization': `${token}`,

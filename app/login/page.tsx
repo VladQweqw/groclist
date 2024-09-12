@@ -43,7 +43,7 @@ export default function Login() {
       }
 
 
-      await fetch("http://localhost:3000" + '/login', {
+      await fetch("http://192.168.1.68:3000" + '/login', {
          method: 'POST',
          body: JSON.stringify({
             email,

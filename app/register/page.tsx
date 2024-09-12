@@ -37,7 +37,7 @@ export default function Register() {
       }
 
          
-      await fetch("http://localhost:3000" + '/register', {
+      await fetch("http://192.168.1.68:3000" + '/register', {
          method: 'POST',
          body: JSON.stringify({
             email,

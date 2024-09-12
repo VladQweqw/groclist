@@ -17,7 +17,7 @@ export default function ListDetailComponent(data: listType) {
 
          const token = getCookie('jwt=')
      
-        const res = fetch("http://localhost:3000" + '/list/' + id, {
+        const res = fetch("http://192.168.1.68:3000" + '/list/' + id, {
            method: 'DELETE',
            headers: {
               'Content-Type': 'application/json',
