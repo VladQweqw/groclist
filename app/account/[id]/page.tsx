@@ -8,7 +8,7 @@ async function getUserDetails(id: string) {
     const cookiesStore = cookies()
     const token = cookiesStore.get("jwt")?.value || undefined
     
-    const res = await fetch(process.env.http://192.168.1.69:3000 + '/user/' + id, {
+    const res = await fetch("localhost:3000" + '/user/' + id, {
        method: 'GET',
        headers: {
           'Content-Type': 'application/json',

@@ -43,7 +43,7 @@ export default function Login() {
       }
 
 
-      await fetch(process.env.http://192.168.1.69:3000 + '/login', {
+      await fetch("localhost:3000" + '/login', {
          method: 'POST',
          body: JSON.stringify({
             email,
