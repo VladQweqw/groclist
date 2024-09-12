@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import ListDetailComponent from '../../../components/listDetail';
 
 async function generateStaticParams() {
-   const posts = await fetch("localhost:3000" + '/list/').then((res) => res.json())
+   const posts = await fetch("http://localhost:3000" + '/list/').then((res) => res.json())
   
    return posts.map((post: any) => ({
      id: post._id,
@@ -15,7 +15,7 @@ async function getDetailList(id: string) {
    const cookiesStore = cookies()
    const token = cookiesStore.get("jwt")?.value || undefined
 
-   const res = await fetch("localhost:3000" + '/list/' + id, {
+   const res = await fetch("http://localhost:3000" + '/list/' + id, {
       method: 'GET',
       headers: {
          'Content-Type': 'application/json',

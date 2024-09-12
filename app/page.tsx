@@ -13,7 +13,7 @@ async function get_lists() {
    const cookiesStore = cookies()
    const token = cookiesStore.get("jwt")?.value || undefined
    
-   const res = await fetch("localhost:3000/" + "?reverse=true", {
+   const res = await fetch("http://localhost:3000/" + "?reverse=true", {
       headers: {
          'Content-Type': "application/json",
          'Authorization': `${token}`,
