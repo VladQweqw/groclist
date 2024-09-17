@@ -48,7 +48,7 @@ export default async function ListDetail({ params }: { params: {id: string}}) {
    }
    return(
     <main className="main center list-detail-main">
-         <ListDetailComponent {...list.data} />
+         <ListDetailComponent {...list.data} isEditable={true} />
     </main>
    )
 }

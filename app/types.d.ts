@@ -9,12 +9,14 @@ type listType = {
       email: string,
       nickname: string
    },
+   isEditable: boolean,
 }
 
 type listItemType = {
    _id: string,
    name: string,
    isChecked: boolean,
+   origin_list: string,
 }
 
 type userType = {
