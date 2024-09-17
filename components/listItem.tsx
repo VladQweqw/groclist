@@ -99,6 +99,9 @@ function ListItem(data: {
    
    return(
       <div className="list-item" >
+            
+            
+            {data.isEditable ? <>
             <div 
             onClick={() => {
                data.removeListItem(data.list_item._id)
@@ -107,8 +110,7 @@ function ListItem(data: {
             className="remove-btn">
                <i className="fa-solid fa-trash"></i>
             </div>
-            
-            {data.isEditable ? <div className="checkbox-wrapper-4">
+            <div className="checkbox-wrapper-4">
                <input className="edited" type="text" name="" 
                onBlur={(e) => {
                   const copy = [...data.list];
@@ -123,7 +125,7 @@ function ListItem(data: {
                }} 
                
                defaultValue={data.list_item.name} id="" />
-            </div>: <div className="checkbox-wrapper-4 editeddd">
+            </div> </>: <div className="checkbox-wrapper-4 editeddd">
                <input
                   
                   checked={fakeState}
