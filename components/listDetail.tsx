@@ -7,11 +7,12 @@ import { useRouter } from 'next/navigation'
 export default function ListDetailComponent(data: listType) {
     const router = useRouter()
     const [list, setList] = useState(data.list)
-
+    
     function updateList(id: string) {       
+    
+        // console.log(list);
         
-        
-        const res = fetch("http://192.168.1.68:3000" + '/list/' + id, {
+        const res = fetch("http://192.168.1.69:3000" + '/list/' + id, {
             method: 'PUT',
             headers: {
                'Content-Type': 'application/json',
@@ -78,6 +79,7 @@ export default function ListDetailComponent(data: listType) {
                             name: "ADD",
                             isChecked: false,
                             origin_list: list[0].origin_list,
+                            _id: `NUL${new Date().getTime()}`
                         }])
                     }}
                     className="secondary-btn btn">Add item</button>

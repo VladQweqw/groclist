@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { use, useEffect, useState } from "react"
 
 async function update_list_items(body: {
    item_id: string,
@@ -34,38 +34,39 @@ export function ListContainer(data: {
    )
 
    function removeListItem(id: string) {
-      const new_list = data.list.filter((item) => item._id !== id);
-
+      console.log(id);
+      
+      const new_list = data.item_list.filter((item) => item._id !== id);      
       data.setList(new_list)
    }
-   
+
    return (
       <>
         <div className="list-details">
             <p>Total items: {list_len}</p>
             <p className={`${totalCompleted === list_len ? "list-details-completed" : ""}`}>Completed: {totalCompleted}/{list_len}</p>
          </div>
-         {data?.item_list?.length >= 0 ? data?.item_list?.map((list_item: listItemType, index: number) => {
+         {data?.item_list?.length >= 0 ? data?.item_list?.map((list_item: listItemType, index: number) => {            
             return <ListItem 
                setList={data.setList}
-               list={data.list}
+               list={data.item_list}
                removeListItem={removeListItem}
                isEditable={data.isEditable}
                index={(data.index_list) + index}
                list_item={list_item}
-               key={index}
+               key={list_item._id}
                setTotalCompleted={setTotalCompleted}
             />
          }) :
          data?.list?.map((list_item: listItemType, index: number) => {
             return <ListItem 
                setList={data.setList}
-               list={data.list}
+               list={data.item_list}
                removeListItem={removeListItem}
                isEditable={data.isEditable}
                index={(data.index_list) + index}
                list_item={list_item}
-               key={index}
+               key={list_item._id}
                setTotalCompleted={setTotalCompleted}
             />
          })
@@ -109,13 +110,15 @@ function ListItem(data: {
             
             {data.isEditable ? <div className="checkbox-wrapper-4">
                <input className="edited" type="text" name="" 
-               onChange={(e) => {
-                  console.log(data.list);
+               onBlur={(e) => {
                   const copy = [...data.list];
-                  let item_id = copy.findIndex((item) => item._id === data.list_item._id);
-
-                  copy[item_id].name = e.target.value;                  
+                  console.log(copy);
                   
+                  let item_id = copy.findIndex((item) => item._id === data.list_item._id);
+                  if(item_id === -1) e.preventDefault() 
+                     console.log(item_id);
+                     
+                  copy[item_id].name = e.target.value;                  
                   data.setList([...copy])
                }} 
                
