@@ -11,7 +11,7 @@ export default function ListDetailComponent(data: listType) {
     function updateList(id: string) {       
         
         
-        const res = fetch("http://192.168.1.69:3000" + '/list/' + id, {
+        const res = fetch("http://192.168.1.68:3000" + '/list/' + id, {
             method: 'PUT',
             headers: {
                'Content-Type': 'application/json',
